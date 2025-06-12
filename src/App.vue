@@ -41,11 +41,11 @@ type Res = {
 const delta = ref(0);
 const tick = ref(0);
 const status = ref<'failed' | 'ntp' | 'cache'>();
-const fixed = ref<Date>(new Date());
+const fixed = ref(new Date());
 watch([delta, tick], ([delta,]) => {
   requestAnimationFrame(() => {
     const date = new Date();
-    date.setTime(Date.now() + delta + config.value.tweak);
+    date.setTime(Date.now() + delta + config.value.tweak * 1000);
     fixed.value = date;
   });
 });
