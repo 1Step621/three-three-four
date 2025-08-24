@@ -85,11 +85,11 @@ const audioContext = new AudioContext();
 const playSquareWave = (delay: number, accent: boolean) => {
   const oscillator = audioContext.createOscillator();
   oscillator.type = 'square';
-  oscillator.frequency.setValueAtTime(accent ? 880 : 440, audioContext.currentTime);
+  oscillator.frequency.value = accent ? 880 : 440;
 
   const gainNode = audioContext.createGain();
-  gainNode.gain.setValueAtTime(1, audioContext.currentTime + delay);
-  gainNode.gain.exponentialRampToValueAtTime(0.1, audioContext.currentTime + delay + 0.1);
+  gainNode.gain.value = 0.7;
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + delay + 0.1);
 
   oscillator.connect(gainNode);
   gainNode.connect(audioContext.destination);
