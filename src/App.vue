@@ -88,11 +88,11 @@ const playSquareWave = (delay: number, accent: boolean) => {
   oscillator.frequency.value = accent ? 880 : 440;
 
   const gainNode = audioContext.createGain();
-  gainNode.gain.value = 0.7;
-  gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + delay + 0.1);
+  gainNode.gain.setValueAtTime(0.6, audioContext.currentTime + delay);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + delay + 0.1);
 
-  oscillator.connect(gainNode);
   gainNode.connect(audioContext.destination);
+  oscillator.connect(gainNode);
 
   oscillator.start(audioContext.currentTime + delay);
   oscillator.stop(audioContext.currentTime + delay + 0.1);
